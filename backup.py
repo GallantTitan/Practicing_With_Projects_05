@@ -1,46 +1,50 @@
-import random
 
-class Questions_MCQs_Answers:
-    def __init__(self, q_m_a, total):
+    
+class Quiz():
+    def __init__(self, q_m_a):
         self.q_m_a = q_m_a
-        self.total = total
         self.mcqs = None
         self.ans = None
         self.u_ans = None
-        self.correct = 0
         self.false = 0
-
-
-class Quiz(Questions_MCQs_Answers):
-    def quiz(self):
-        print(list(self.q_m_a.keys())[0])
+        self.wrong = {}
+        self.wrong_with_roll = {}
+        self.str_w_q = []
+        
+    def quiz(self, roll_no):
+        question = self.q_m_a.keys()
+        print(list(question)[0])
         for mcqs_ans in self.q_m_a.values():
             for m, a in mcqs_ans.items():
                 self.mcqs = m
                 self.ans = a
         print(f"a): {self.mcqs[0]}\t\tb): {self.mcqs[1]}\nc): {self.mcqs[2]}\t\td): {self.mcqs[3]}")
         self.u_ans = input("Your answer: ")
-        if (self.u_ans==self.ans):
-            self.correct += 1
-        else:
-            self.false += 1
-
-
-class Student_Result(Quiz):
-
-    def check_marks(self):
-        global marks 
-        marks = 14
         
-    def wrong_questions(self):
+
         if (self.u_ans!=self.ans):
-            print(f"Question: {list(self.q_m_a.keys())[0]}")
-            print(f"Correct Answer: {self.ans}.")
+            self.str_w_q = list(question)[0]
+            w = {self.str_w_q : self.ans}      
+            if roll_no not in self.wrong_with_roll:
+                self.wrong_with_roll[roll_no] = {}
+            self.wrong_with_roll[roll_no].update(w)
+
+        if self.u_ans == self.ans:
+            return 1
+        else:
+            return 0 
         
+    def wrong_answers(self, r_no):
+        if (r_no not in self.wrong_with_roll):
+            return "No data found."
+        print("\nHere is your wrong question with answer...")
+        i = 1
+        for q, a in self.wrong_with_roll[r_no].items():
+            print(f"Question {i}: {q}")
+            print(f"Correct Answer: {a}.")
+            i += 1
 
-
-
-
+        
 
 
 #case 1:
@@ -51,6 +55,8 @@ all_student_info = []
 choices = """\n1. Create Quiz
 2. Take Quiz
 3. Check Result
+4. Check Wrong Answers
+5. Save File To JSON
 6. Exit"""
 
 while True: 
@@ -64,28 +70,39 @@ while True:
                 question = input(f"Question {x+1}: ")
                 mcqs = []
                 for i in range(4):
-                    x = input(f"MCQ {i+1}: ")
-                    mcqs.append(x)
+                    option = input(f"MCQ {i+1}: ")
+                    mcqs.append(option)
                 answer = input("Answer: ")
                 q_m_a = {question:{tuple(mcqs):answer}}
-                Q_M_A = Quiz(q_m_a, que_no)
+                Q_M_A = Quiz(q_m_a)
                 all_questions.append(Q_M_A)
         case 2:
+            marks = 0
             s_name = input("Your Name: ")
             s_roll_no = input("Your Roll No: ")
-            test_unique_id = random.randint(1111,9999)
             student_info = [s_name, s_roll_no]
             for i, question in enumerate(all_questions):
                 print(f"\nQuestion {i+1}: ",end="")
-                question.quiz()
+                marks += question.quiz(s_roll_no)
+            student_info.append(marks)
+            all_student_info.append(student_info)
+            print(all_student_info)
         case 3:
-            print(f"You Got {marks} marks.")
-            if marks!=que_no:
-                print("Wrong Answers...")
-                for i, question in enumerate(all_questions):
-                    question.wrong_questions()
-                    
-
+            check_roll_no = input("Roll No: ")
+            for n_r_m_i in all_student_info:
+                if check_roll_no==n_r_m_i[1]:
+                    print(f"Name: {n_r_m_i[0]}\t\tRoll NO: {n_r_m_i[1]}")
+                    print(f"You Got {n_r_m_i[2]} marks.")
+                    break
+            else:
+                print("Student not present.")
+        case 4:
+            check_roll_no = input("Roll No: ")
+            print("")
+            for s_s_w_a in all_questions:
+                s_s_w_a.wrong_answers(check_roll_no)
+        case 5:
+            pass
         case 6:
             break
 

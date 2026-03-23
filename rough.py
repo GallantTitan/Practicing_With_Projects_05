@@ -1,6 +1,8 @@
-# x = {"what is 6+11":{(32,2132,17,21):17}}
+x = {"what is 6+11":{(32,2132,17,21):17},
+    "what is 7+11":{(32,2132,17,21):18}}
 
-# print(list(x.keys())[0])
+for q,a in x.items():
+    print(q)
 # mcqs = None
 # ans = None
 # for mcqs_ans in x.values():
@@ -18,5 +20,4 @@
 #     print(list(x.keys())[i])
 #     for j in range(4):
 #         m_a = x.values()
-
 
