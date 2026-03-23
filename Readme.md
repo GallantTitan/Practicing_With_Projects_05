@@ -1,7 +1,6 @@
 # 📝 CLI Quiz App in Python
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python\&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 A **command-line quiz application** in Python that allows users to **create quizzes, take quizzes, track results, and save them in JSON format**.
 Built using **Object-Oriented Programming (OOP)** and Python’s built-in **JSON module**.
@@ -33,14 +32,14 @@ Built using **Object-Oriented Programming (OOP)** and Python’s built-in **JSON
 1. Clone the repository:
 
 ```bash
-git clone <your-repo-url>
-cd <your-repo-folder>
+git clone GallantTitan/Practicing_With_Projects_05
+cd Practicing_With_Projects_05
 ```
 
 2. Run the application:
 
 ```bash
-python quiz_app.py
+python 14_quiz_app_cli.py
 ```
 
 3. Choose from the menu:
@@ -111,12 +110,12 @@ python quiz_app.py
 
 ## 👨‍💻 Author
 
-**Khubayb Saleem** – Computer Science & AI Enthusiast
+**Khubayb Saleem**
 
 ---
 
-## 📜 License
+## ⭐ Note
 
-This project is open-source and available under the **MIT License**.
+This project is part of my learning journey toward becoming a **Software Engineer** and **AI Developer**.
 
 ---
