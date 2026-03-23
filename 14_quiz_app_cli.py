@@ -69,12 +69,7 @@ class Quiz():
 
         return all_stu_info
 
-
-
-        
-
-
-#case 1:
+# main code
 
 all_questions = []
 all_student_info = []
