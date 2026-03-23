@@ -10,6 +10,8 @@ class Quiz():
         self.wrong = {}
         self.wrong_with_roll = {}
         self.str_w_q = []
+        self.option_map = {}
+        
         
     def quiz(self, roll_no):
         question = self.q_m_a.keys()
@@ -19,17 +21,21 @@ class Quiz():
                 self.mcqs = m
                 self.ans = a
         print(f"a): {self.mcqs[0]}\t\tb): {self.mcqs[1]}\nc): {self.mcqs[2]}\t\td): {self.mcqs[3]}")
-        self.u_ans = input("Your answer: ")
-        
+        self.option_map = {"a": self.mcqs[0], 
+                           "b" : self.mcqs[1], 
+                           "c": self.mcqs[2], 
+                           "d" : self.mcqs[3]}
+        self.u_ans = input("Your answer(a/b/c/d): ").lower()
+        selected_answer = self.option_map.get(self.u_ans, None)
 
-        if (self.u_ans!=self.ans):
+        if (selected_answer!=self.ans):
             self.str_w_q = list(question)[0]
             w = {self.str_w_q : self.ans}      
             if roll_no not in self.wrong_with_roll:
                 self.wrong_with_roll[roll_no] = {}
             self.wrong_with_roll[roll_no].update(w)
 
-        if self.u_ans == self.ans:
+        if selected_answer == self.ans:
             return 1
         else:
             return 0 
